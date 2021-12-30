@@ -10,7 +10,7 @@ data class User(
     @SerializedName("username")
     @Expose
     val name: String? = null,
-    @SerializedName("")
+    @SerializedName("image")
     @Expose
     val image: String? = null,
 ) {

@@ -1,16 +1,18 @@
 package com.prography.sw.mvikotiln.network
 
+import com.prography.sw.mvikotiln.util.Event
+
 data class DataState<T>(
-    var message: String? = null,
+    var message: Event<String>? = null,
     var loading: Boolean = false,
-    var data: T? = null
+    var data: Event<T>? = null
 ) {
-    companion object{
+    companion object {
         fun <T> error(
             message: String
-        ):DataState<T>{
+        ): DataState<T> {
             return DataState(
-                message=message,
+                message = Event(message),
                 loading = false,
                 data = null
             )
@@ -18,7 +20,7 @@ data class DataState<T>(
 
         fun <T> loading(
             isLoading: Boolean
-        ):DataState<T>{
+        ): DataState<T> {
             return DataState(
                 message = null,
                 loading = isLoading,
@@ -26,17 +28,18 @@ data class DataState<T>(
             )
         }
 
-        fun  <T> data(
-            message: String?=null,
-            data :T?=null
-        ):DataState<T>{
+        fun <T> data(
+            message: String? = null,
+            data: T? = null
+        ): DataState<T> {
             return DataState(
-                message=message,
+                message = Event.messageEvent(message),
                 loading = false,
-                data=data
+                data = Event.dataEvent(data)
             )
         }
     }
+
     override fun toString(): String {
         return "DataState(message=$message,loading=$loading,data=$data)"
     }
